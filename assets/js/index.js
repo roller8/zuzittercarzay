@@ -11,18 +11,19 @@ var sounds      = {
     'kick':     {'src': 'samples/drums/kick1.wav',    'volume': 1   },
     'snare':    {'src': 'samples/drums/snare7.wav',      'volume': 1   },
     'clap':     {'src': 'samples/drums/clap3.wav',          'volume': 0.5 },
-    'clHat':    {'src': 'samples/drums/closedhh2.wav', 'volume': 0.2 },
-    'opHat':    {'src': 'samples/drums/openhh1.wav',   'volume': 0.07},
-    'yeah':     {'src': 'samples/smb_fireball.wav',           'volume': 0.5 },
+    'clHat':    {'src': 'samples/drums/closedhh2.wav', 'volume': 0.5 },
+    'opHat':    {'src': 'samples/drums/openhh1.wav',   'volume': 0.6 },
+    'yeah':     {'src': 'samples/smb_fireball.wav',           'volume': 0.7 },
     'feel':     {'src': 'samples/smb_fireworks.wav',     'volume': 0.5 },
-    'check':    {'src': 'samples/smb_jump-super.wav',     'volume': 0.5 },
-    'here':     {'src': 'samples/smb_kick.wav',         'volume': 0.5 },
+    'check':    {'src': 'samples/smb_jump-super.wav',     'volume': 0.7 },
+    'here':     {'src': 'samples/smb_kick.wav',         'volume': 0.7 },
     'oww':      {'src': 'samples/smb_pipe.wav',              'volume': 0.5 },
     'woo':      {'src': 'samples/smb_powerup_appears.wav', 'volume': 0.5 },
     'hiTom':    {'src': 'samples/smb_powerup.wav',        'volume': 0.5 },
     'midTom':   {'src': 'samples/smb_coin.wav',        'volume': 0.5 },
-    'loTom':    {'src': 'samples/smb_mariodie.wav',        'volume': 0.7 },
-    'cowbell':  {'src': 'samples/smb_world_clear.wav',       'volume': 0.7 }
+    'loTom':    {'src': 'samples/smb_mariodie.wav',        'volume': 1 },
+    'cowbell':  {'src': 'samples/smb_world_clear.wav',       'volume': 0.6 },
+    'kazoo':    {'src': 'samples/kazoo.wav',       'volume': 0.6 }
 };
 
 var pattern     = [
@@ -156,37 +157,39 @@ function handleVolInput() {
 function bindDrumKeys() {
     window.addEventListener("keydown", function() {
         if ($('.tempo input').is(':focus')) return;
-
         switch (window.event.keyCode) {
+            case 192:
+                triggerMono(sounds.kazoo);
+                break;
             case 49:
-                trigger(sounds.kick);
+                trigger(sounds.here);
                 break;
             case 50:
-                trigger(sounds.snare);
+                trigger(sounds.yeah);
                 break;
             case 51:
-                trigger(sounds.clap);
+                trigger(sounds.feel);
                 break;
             case 52:
-                trigger(sounds.cowbell);
+                trigger(sounds.check);
                 break;
             case 53:
-                trigger(sounds.hiTom);
-                break;
-            case 54:
                 trigger(sounds.midTom);
                 break;
+            case 54:
+                triggerMono(sounds.hiTom);
+                break;
             case 55:
-                trigger(sounds.loTom);
+                triggerMono(sounds.woo);
                 break;
             case 56:
-                triggerMono(sounds.yeah);
-                break;
-            case 57:
                 triggerMono(sounds.oww);
                 break;
+            case 57:
+                triggerMono(sounds.loTom);
+                break;
             case 48:
-                triggerMono(sounds.woo);
+                triggerMono(sounds.cowbell);
                 break;
             case 32:
                 $startButton.click();
