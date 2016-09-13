@@ -7,6 +7,7 @@ var interval    = Math.round((minuteToMil / tempo) / subdivision);
 var swing       = false;
 var monoAudio   = new Audio();
 var charlieAudio = new Audio();
+var midi, data;
 
 var sounds      = {
     'kick': {
@@ -289,7 +290,6 @@ function triggerCircus(sound) {
 function playSound(audio) {
     var $glow = $('.glow');
 
-
     audio.play();
     $glow.removeClass('hide');
 
@@ -303,6 +303,7 @@ function stopCircus(audio) {
 
     charlieAudio.pause();
     $glow.removeClass('hide');
+
 
     setTimeout(function () {
         $glow.addClass('hide');
@@ -329,7 +330,9 @@ function playSubdiv(count) {
 
 
 // midi functions
-var midi, data, outputs;
+var midiPlayNote    = 8;
+var midiNotes       = [0, 1, 2, 3, 4, 16, 17, 18, 19, 20, 21, 22, 23, 32, 33, 34, 104, 120];
+var midiTempoNotes  = [40, 56];
 
 function initMidiControls() {
     if (navigator.requestMIDIAccess) {
@@ -344,30 +347,74 @@ function initMidiControls() {
 function onMIDISuccess(midiAccess) {
     midi = midiAccess;
     var inputs = midi.inputs.values();
-    outputs = midi.outputs.values();
+    // var outputs = midi.outputs.values();
 
     for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
         input.value.onmidimessage = onMIDIMessage;
     }
-    // var counter = 0;
+
+    midiLight();
+
     // for (var output = outputs.next(); output && !output.done; output = outputs.next()) {
-    //     output.value.onmidimessage = onMIDIMessage;
-    //     // counter += 1;
-    //     // output.value.send([0x90, counter, 0x7f]);
-
-    //     console.log(output);
+    //     output.value.send([176, 0, 40]);
     // }
-
-    // console.log(midi.outputs);
-
-    // outputs[1].value.send([0x90, counter, 0x7f]);
-    // outputs[0].value.send([0x90, counter, 0x7f]);
 
     midi.onstatechange = onStateChange;
 }
 
 function onMIDIFailure(e) {
     log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + e);
+}
+
+function midiLight(note) {
+    var colors = [1, 15, 60, 63];
+    var outputs = midi.outputs.values();
+    for (var output = outputs.next(); output && !output.done; output = outputs.next()) {
+        if (note) {
+            output.value.send([144, note, colors[Math.floor((Math.random() * 3) + 1)]]);
+        } else {
+            output.value.send([144, midiPlayNote, 60]);
+
+            midiTempoNotes.forEach(function (note, index, array) {
+                output.value.send([144, note, 15]);
+            });
+
+            midiNotes.forEach(function (note, index, array) {
+                output.value.send([144, note, 59]);
+            });
+        }
+    }
+}
+
+function midiTempo(note) {
+    var $input = $('.tempo').find('input');
+    var volume = Number($input.val());
+
+    switch (note) {
+        case 40: // up arrow
+            tempo = volume + 1;
+            $input.val(tempo);
+            break;
+        case 56: // down arrow
+            tempo = volume - 1;
+            $input.val(tempo);
+            break;
+        // case 37: // left arrow
+        //    tempo = volume - 1;
+        //    $input.val(tempo);
+        //    break;
+        // case 39:  // right arrow
+        //    tempo = volume + 1;
+        //    $input.val(tempo);
+        //    break;
+    }
+}
+
+function midiReset() {
+    var outputs = midi.outputs.values();
+    for (var output = outputs.next(); output && !output.done; output = outputs.next()) {
+        output.value.send([176, 0, 0]);
+    }
 }
 
 function onMIDIMessage(event) {
@@ -388,57 +435,83 @@ function onMIDIMessage(event) {
         switch (note) {
             case 0:
                 trigger(sounds.kick);
+                midiLight(note);
                 break;
             case 1: // noteOn message
                 trigger(sounds.snare);
+                midiLight(note);
                 break;
             case 2: // noteOn message
                 trigger(sounds.clap);
+                midiLight(note);
                 break;
             case 3: // noteOn message
                 trigger(sounds.clHat);
+                midiLight(note);
                 break;
             case 4: // noteOn message
                 trigger(sounds.opHat);
+                midiLight(note);
                 break;
             case 16: // noteOn message
                 triggerMono(sounds.kazoo);
+                midiLight(note);
                 break;
             case 17: // noteOn message
-                triggerMono(sounds.here);
+                trigger(sounds.here);
+                midiLight(note);
                 break;
             case 18: // noteOn message
                 triggerMono(sounds.yeah);
+                midiLight(note);
                 break;
             case 19: // noteOn message
                 triggerMono(sounds.feel);
+                midiLight(note);
                 break;
             case 20: // noteOn message
-                triggerMono(sounds.check);
+                trigger(sounds.check);
+                midiLight(note);
                 break;
             case 21: // noteOn message
-                triggerMono(sounds.midTom);
+                trigger(sounds.midTom);
+                midiLight(note);
                 break;
             case 22: // noteOn message
                 triggerMono(sounds.hiTom);
+                midiLight(note);
                 break;
             case 23: // noteOn message
                 triggerMono(sounds.woo);
+                midiLight(note);
                 break;
             case 32: // noteOn message
                 triggerMono(sounds.oww);
+                midiLight(note);
                 break;
             case 33: // noteOn message
                 triggerMono(sounds.loTom);
+                midiLight(note);
                 break;
             case 34: // noteOn message
                 triggerMono(sounds.cowbell);
+                midiLight(note);
+                break;
+            case 40: // noteOn message
+                midiTempo(note);
+                // midiLight(note);
+                break;
+            case 56: // noteOn message
+                // triggerMono(sounds.cowbell);
+                midiTempo(note);
                 break;
             case 104: // noteOn message
                 triggerCircus(sounds.charlie);
+                midiLight(note);
                 break;
             case 120: // noteOn message
                 stopCircus(charlieAudio);
+                midiReset();
                 break;
             case 8:
                 $startButton.click();
@@ -447,28 +520,6 @@ function onMIDIMessage(event) {
     }
 
     console.log('data', data, 'cmd', cmd, 'channel', channel, 'note', note);
-    // logger(keyData, 'key data', data);
-}
-
-// function noteOn(midiNote, velocity) {
-//     player(midiNote, velocity);
-// }
-
-// function noteOff(midiNote, velocity) {
-//     player(midiNote, velocity);
-// }
-
-function player(note, velocity) {
-    console.log('trying to play!');
-    // var sample = sampleMap['key' + note];
-    // if (sample) {
-    //     if (type == (0x80 & 0xf0) || velocity == 0) { //QuNexus always returns 144
-    //         btn[sample - 1].classList.remove('active');
-    //         return;
-    //     }
-    //     btn[sample - 1].classList.add('active');
-    //     btn[sample - 1].play(velocity);
-    // }
 }
 
 function onStateChange(event) {
