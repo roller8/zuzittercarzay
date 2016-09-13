@@ -8,21 +8,21 @@ var swing       = false;
 var monoAudio   = new Audio();
 
 var sounds      = {
-    'kick':     {'src': 'samples/smb_bump.wav',    'volume': 1   },
-    'snare':    {'src': 'samples/smb_jump-super.wav',      'volume': 1   },
-    'clap':     {'src': 'samples/smb_kick.wav',          'volume': 0.5 },
-    'clHat':    {'src': 'samples/smb_fireball.wav', 'volume': 0.2 },
-    'opHat':    {'src': 'samples/smb_stomp.wav',   'volume': 0.07},
-    'yeah':     {'src': 'samples/awyeah.wav',           'volume': 0.4 },
-    'feel':     {'src': 'samples/canyoufeelit.wav',     'volume': 0.4 },
-    'check':    {'src': 'samples/checkthisout.wav',     'volume': 0.4 },
-    'here':     {'src': 'samples/herewego.wav',         'volume': 0.4 },
-    'oww':      {'src': 'samples/oww.wav',              'volume': 0.4 },
-    'woo':      {'src': 'samples/woo.wav',              'volume': 0.4 },
-    'hiTom':    {'src': 'samples/12_TOM_01.wav',        'volume': 0.3 },
-    'midTom':   {'src': 'samples/14_TOM_03.wav',        'volume': 0.3 },
-    'loTom':    {'src': 'samples/17_TOM_06.wav',        'volume': 0.3 },
-    'cowbell':  {'src': 'samples/808cowbell.wav',       'volume': 0.5 }
+    'kick':     {'src': 'samples/drums/kick1.wav',    'volume': 1   },
+    'snare':    {'src': 'samples/drums/snare7.wav',      'volume': 1   },
+    'clap':     {'src': 'samples/drums/clap3.wav',          'volume': 0.5 },
+    'clHat':    {'src': 'samples/drums/closedhh2.wav', 'volume': 0.2 },
+    'opHat':    {'src': 'samples/drums/openhh1.wav',   'volume': 0.07},
+    'yeah':     {'src': 'samples/smb_fireball.wav',           'volume': 0.5 },
+    'feel':     {'src': 'samples/smb_fireworks.wav',     'volume': 0.5 },
+    'check':    {'src': 'samples/smb_jump-super.wav',     'volume': 0.5 },
+    'here':     {'src': 'samples/smb_kick.wav',         'volume': 0.5 },
+    'oww':      {'src': 'samples/smb_pipe.wav',              'volume': 0.5 },
+    'woo':      {'src': 'samples/smb_powerup_appears.wav', 'volume': 0.5 },
+    'hiTom':    {'src': 'samples/smb_powerup.wav',        'volume': 0.5 },
+    'midTom':   {'src': 'samples/smb_coin.wav',        'volume': 0.5 },
+    'loTom':    {'src': 'samples/smb_mariodie.wav',        'volume': 0.7 },
+    'cowbell':  {'src': 'samples/smb_world_clear.wav',       'volume': 0.7 }
 };
 
 var pattern     = [
