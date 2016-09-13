@@ -94,6 +94,7 @@ function initAudioPlayer() {
     bindDrumKeys();
     togglePattern();
     handleSwing();
+    initMidiControls();3
 }
 
 function setObjReference() {
@@ -288,6 +289,7 @@ function triggerCircus(sound) {
 function playSound(audio) {
     var $glow = $('.glow');
 
+
     audio.play();
     $glow.removeClass('hide');
 
@@ -322,6 +324,161 @@ function playSubdiv(count) {
             }
             $(elt).addClass('on');
         });
+    }
+}
+
+
+// midi functions
+var midi, data, outputs;
+
+function initMidiControls() {
+    if (navigator.requestMIDIAccess) {
+        navigator.requestMIDIAccess({
+            sysex: false
+        }).then(onMIDISuccess, onMIDIFailure);
+    } else {
+        alert("No MIDI support in your browser.");
+    }
+}
+
+function onMIDISuccess(midiAccess) {
+    midi = midiAccess;
+    var inputs = midi.inputs.values();
+    outputs = midi.outputs.values();
+
+    for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
+        input.value.onmidimessage = onMIDIMessage;
+    }
+    // var counter = 0;
+    // for (var output = outputs.next(); output && !output.done; output = outputs.next()) {
+    //     output.value.onmidimessage = onMIDIMessage;
+    //     // counter += 1;
+    //     // output.value.send([0x90, counter, 0x7f]);
+
+    //     console.log(output);
+    // }
+
+    // console.log(midi.outputs);
+
+    // outputs[1].value.send([0x90, counter, 0x7f]);
+    // outputs[0].value.send([0x90, counter, 0x7f]);
+
+    midi.onstatechange = onStateChange;
+}
+
+function onMIDIFailure(e) {
+    log("No access to MIDI devices or your browser doesn't support WebMIDI API. Please use WebMIDIAPIShim " + e);
+}
+
+function onMIDIMessage(event) {
+    data = event.data,
+    cmd = data[0] >> 4,
+    channel = data[0] & 0xf,
+    type = data[0] & 0xf0,
+    note = data[1],
+    velocity = data[2];
+    // // with pressure and tilt off
+    // // note off: 128, cmd: 8
+    // // note on: 144, cmd: 9
+    // // pressure / tilt on
+    // // pressure: 176, cmd 11:
+    // // bend: 224, cmd: 14
+
+    if (velocity > 0) {
+        switch (note) {
+            case 0:
+                triggerMono(sounds.kick);
+                break;
+            case 1: // noteOn message
+                triggerMono(sounds.snare);
+                break;
+            case 2: // noteOn message
+                triggerMono(sounds.clap);
+                break;
+            case 3: // noteOn message
+                triggerMono(sounds.clHat);
+                break;
+            case 4: // noteOn message
+                triggerMono(sounds.opHat);
+                break;
+            case 16: // noteOn message
+                triggerMono(sounds.kazoo);
+                break;
+            case 17: // noteOn message
+                triggerMono(sounds.here);
+                break;
+            case 18: // noteOn message
+                triggerMono(sounds.yeah);
+                break;
+            case 19: // noteOn message
+                triggerMono(sounds.feel);
+                break;
+            case 20: // noteOn message
+                triggerMono(sounds.check);
+                break;
+            case 21: // noteOn message
+                triggerMono(sounds.midTom);
+                break;
+            case 22: // noteOn message
+                triggerMono(sounds.hiTom);
+                break;
+            case 23: // noteOn message
+                triggerMono(sounds.woo);
+                break;
+            case 32: // noteOn message
+                triggerMono(sounds.oww);
+                break;
+            case 33: // noteOn message
+                triggerMono(sounds.loTom);
+                break;
+            case 34: // noteOn message
+                triggerMono(sounds.cowbell);
+                break;
+            case 104: // noteOn message
+                triggerCircus(sounds.charlie);
+                break;
+            case 120: // noteOn message
+                stopCircus(charlieAudio);
+                break;
+            case 8:
+                $startButton.click();
+                break;
+        }
+    }
+
+    console.log('data', data, 'cmd', cmd, 'channel', channel, 'note', note);
+    // logger(keyData, 'key data', data);
+}
+
+// function noteOn(midiNote, velocity) {
+//     player(midiNote, velocity);
+// }
+
+// function noteOff(midiNote, velocity) {
+//     player(midiNote, velocity);
+// }
+
+function player(note, velocity) {
+    console.log('trying to play!');
+    // var sample = sampleMap['key' + note];
+    // if (sample) {
+    //     if (type == (0x80 & 0xf0) || velocity == 0) { //QuNexus always returns 144
+    //         btn[sample - 1].classList.remove('active');
+    //         return;
+    //     }
+    //     btn[sample - 1].classList.add('active');
+    //     btn[sample - 1].play(velocity);
+    // }
+}
+
+function onStateChange(event) {
+    var port  = event.port;
+    var state = port.state;
+    var name  = port.name;
+    var type  = port.type;
+
+    if (type == "input") {
+        console.log("name", name, "port", port, "state", state);
     }
 }
 
