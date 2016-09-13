@@ -88,12 +88,38 @@ var pattern     = [
 ];
 
 function initAudioPlayer() {
+    handleSoundBanks();
     setObjReference();
     handleStartStop();
     handleVolInput();
     bindDrumKeys();
-    togglePattern();
     handleSwing();
+    handleRandomFloat();
+    togglePattern();
+}
+
+function handleRandomFloat() {
+    var $banks = $('.bank');
+    function loopMe() {
+        console.log('hello');
+    }
+    setInterval(loopMe, 1000);
+}
+
+function handleSoundBanks() {
+    var $bank = $('.bank');
+    var $row = $('.row');
+    
+    $bank.on('click', function(e) {
+        e.preventDefault();
+        var $target = $(e.target);
+        var index = $bank.index($target);
+        $row.addClass('hide').eq(index).toggleClass('hide');
+        $target.addClass('active').siblings('.active').removeClass('active');
+        $target.css({
+            'animation-duration': (30/tempo)+ 's'
+        });
+    });
 }
 
 function setObjReference() {
@@ -122,7 +148,7 @@ function handleSwing() {
 function loadPattern() {
     $('.row').each(function (index, elem) {
         $(elem).find('button').each(function (i, el) {
-            if (pattern[index].seq[i] === 1) {
+            if (pattern[index] && pattern[index].seq[i] === 1) {
                 $(el).addClass('active');
             }
         });
@@ -150,12 +176,15 @@ function handleStartStop() {
         $(e.currentTarget).toggleClass('active');
         handleTempo(init);
         if ($startButton.hasClass('active')) {
-            $('.glow').removeClass('hide');
+            $('.glow').addClass('rotate');
+            $('.jumper').addClass('jumping');
             loop();
         } else {
             clearTimeout(timer);
             count = 0;
-            $('.glow').addClass('hide');
+            $('.glow').removeClass('rotate');
+            $('.jumper').removeClass('jumping');
+            $('.bank').removeClass('active');
             $('.simple-button').removeClass('on');
         }
 
@@ -287,24 +316,25 @@ function triggerCircus(sound) {
 
 function playSound(audio) {
     var $glow = $('.glow');
+    var $jumper = $('.jumper');
+    var $activeBank = $('.bank.active');
 
     audio.play();
-    $glow.removeClass('hide');
-
-    setTimeout(function () {
-        $glow.addClass('hide');
-    }, interval - 5);
+    $glow.css({
+        'animation-duration': 60/tempo + 's'
+    });
+    $jumper.css({
+        'animation-duration': (60/tempo) * 4+ 's'
+    });
+    $activeBank.css({
+        'animation-duration': (30/tempo)+ 's'
+    });
 }
 
 function stopCircus(audio) {
-    var $glow = $('.glow');
 
     charlieAudio.pause();
-    $glow.removeClass('hide');
 
-    setTimeout(function () {
-        $glow.addClass('hide');
-    }, interval - 5);
 }
 
 function playSubdiv(count) {

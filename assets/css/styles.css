@@ -2,20 +2,53 @@
   /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
   html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
 
-section {
-    background: url(../../images/main.jpg) no-repeat;
-    width: 820px;
-    height: 400px;
-    margin: 0 auto;
-    padding-top: 170px;
-    margin-top: 80px;
-    position: relative;
+
+
+.bg {
+    background-image: linear-gradient(to bottom, #2989d8 22%,#2989d8 22%,#87d3f5 63%,#ffffff 100%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}    
+.controls {
+    background: url(../../images/ground.jpg) no-repeat bottom center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
 }
 
-.row { margin: 0 0 8px 75px; }
+.row {
+    position: absolute;
+    min-width: 580px;
+    bottom: 200px;
+    left: 50%;
+    margin-left: -319px;
+}
 
-.row > span {
-    display: inline-block;
+.row:nth-of-type(2n) .jumper{
+    background: url(../../images/mario.png) no-repeat;
+    background-size: cover;
+}
+
+.row:nth-of-type(2n + 1) .jumper {
+    background: url(../../images/luigi.png) no-repeat;
+    background-size: cover;
+}
+
+.jumper {
+    width: 33px;
+    height: 54px;
+    background-size: cover;
+    position: absolute;
+    top: -54px;
+    left: 12px;
+}
+
+.bank {
+    position: absolute;
     color: #fff;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 10px;
@@ -23,26 +56,106 @@ section {
     width: 44px;
 }
 
+.bank.one {
+    top: 30%;
+    left: 0;
+    width: 126px;
+    height: 70px;
+    background: url(../../images/mouth.png) no-repeat;
+    overflow: hidden;
+    text-indent: 120%;
+    white-space: nowrap;
+    transform: scale(.7);
+}
+.bank.two {
+    top: 30%;
+    left: 20%;
+    width: 126px;
+    height: 171px;
+    background: url(../../images/kitty.png) no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    text-indent: 120%;
+    white-space: nowrap;
+    transform: scale(.5);
+}
+.bank.three {
+    top: 30%;
+    left: 40%;
+    width: 126px;
+    height: 130px;
+    background: url(../../images/pumpkin.png) no-repeat;
+    overflow: hidden;
+    text-indent: 120%;
+    white-space: nowrap;
+    transform: scale(.5);
+}
+.bank.four {
+    top: 30%;
+    left: 60%;
+    width: 126px;
+    height: 126px;
+    background: url(../../images/bear.png) no-repeat;
+    overflow: hidden;
+    text-indent: 120%;
+    white-space: nowrap;
+    transform: scale(.5);
+}
+.bank.five {
+    top: 30%;
+    left: 80%;
+    width: 126px;
+    height: 126px;
+    background: url(../../images/tiger.png) no-repeat;
+    overflow: hidden;
+    text-indent: 120%;
+    white-space: nowrap;
+    transform: scale(.5);
+}
+.bank.active {
+    transform: scale(1);
+    animation: activeBank 200ms linear infinite;
+}
+
+
+@keyframes activeBank {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
 .simple-button {
     border: none;
-    background: url(../../images/simple-button.jpg) no-repeat;
+    background: url(../../images/simple-button-Q.jpg) no-repeat;
+    background-size: cover;
     width: 33px;
     height: 33px;
     overflow: hidden;
     text-indent: 120%;
     white-space: nowrap;
+    padding: 0;
+    float: left;
 }
 
-.simple-button.active { background: url(../../images/simple-button-active.jpg) no-repeat; }
+
+.simple-button.active { background: url(../../images/simple-button-brick.jpg) no-repeat; }
 
 .simple-button.on { border: 1px solid red; }
 
 .simple-button:nth-of-type(4n+1) {  margin-left: 12px; }
 
-.start-stop,
+/*.start-stop,
 .swing {
     width: 100px;
     margin: 0 0 20px 458px;
+}*/
+.functions {
+    position: absolute;
+    bottom: 16px;
 }
 .top-btn button {
     display: block;
@@ -69,27 +182,32 @@ section {
 
 .toggle-pattern {
     float: left;
-    margin-left: 225px;
+    margin-left: 30vw;
 }
 
+.start-stop,
 .swing {
     float: left;
-    margin-left: 55px;
+    margin-left: 10vw;
 }
 
 .tempo {
-    float: right;
-    width: 127px;
-    margin: 16px 73px 0 0;
+    width: 70px;
+    position: absolute;
+    bottom: 12px;
+    right: 17px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,.5);
 }
 
 .tempo input {
     background: none;
     border: none;
     color: #f00;
-    font-size: 16px;
+    font-size: 26px;
     width: inherit;
-    text-align: right;
+    text-align: center;
 }
 
 .tempo label {
@@ -99,17 +217,74 @@ section {
     font-size: 10px;
     width: inherit;
     text-align: center;
-    margin-top: 16px;
+    margin-top: 4px;
 }
 
 .glow {
     position: absolute;
-    width: 33px;
-    height: 19px;
-    background-color: rgba(255,0,0, 0.2);
+    width: 99px;
+    height: 99px;
+    background: url(../../images/roundcake.png) no-repeat;
     top: 38px;
     right: 80px;
-    box-shadow: 0 0 23px rgba(255,0,0,1);
+    border-radius: 50%;
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.glow.rotate {
+    animation: rotating 200ms linear infinite;
+    box-shadow: 0 0 100px rgba(255,144,22,1);
+}
+
+@keyframes jumper {
+    0% {
+        transform: translate(12px, 0);
+        //transform: translateY(0);
+    }
+    12.5% {
+        transform: translate(88px, -200%);
+        //transform: translateY(-200%);
+    }
+    25% {
+        transform: translate(154px, 0);
+        //transform: translateY(0);
+    }
+    37.5% {
+        transform: translate(220px, -200%);
+        //transform: translateY(-200%);
+    }
+    50% {
+        transform: translate(296px, 0);
+        //transform: translateY(0);
+    }
+    62.5% {
+        transform: translate(362px, -200%);
+        //transform: translateY(-200%);
+    }
+    75% {
+        transform: translate(440px, 0);
+        //transform: translateY(0);
+    }
+    87.5% {
+        transform: translate(506px, -200%);
+        //transform: translateY(-200%);
+    }
+    100% {
+        transform: translate(680px, 120px);
+        //transform: translateY(200%);
+    }
+}
+
+.jumper.jumping {
+    animation: jumper 3000ms linear infinite;
 }
 
 .hide { display: none; }
