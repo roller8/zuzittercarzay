@@ -10,12 +10,12 @@ var charlieAudio = new Audio();
 
 var sounds      = {
     'kick': {
-        'src': 'samples/drums/kick1.wav',
-        'volume': 1
+        'src': 'samples/drums/kick5.wav',
+        'volume': 0.7
     },
     'snare': {
-        'src': 'samples/drums/snare7.wav',
-        'volume': 1
+        'src': 'samples/drums/snare6.wav',
+        'volume': 0.7
     },
     'clap': {
         'src': 'samples/drums/clap3.wav',
@@ -23,11 +23,11 @@ var sounds      = {
     },
     'clHat': {
         'src': 'samples/drums/closedhh2.wav',
-        'volume': 0.5
+        'volume': 0.4
     },
     'opHat': {
         'src': 'samples/drums/openhh1.wav',
-        'volume': 0.6
+        'volume': 0.8
     },
     'yeah': {
         'src': 'samples/smb_fireball.wav',
@@ -213,7 +213,7 @@ function bindDrumKeys() {
         if ($('.tempo input').is(':focus')) return;
         switch (window.event.keyCode) {
             case 192:
-                triggerMono(sounds.kazoo);
+                trigger(sounds.kazoo);
                 break;
             case 49:
                 trigger(sounds.here);
@@ -387,19 +387,19 @@ function onMIDIMessage(event) {
     if (velocity > 0) {
         switch (note) {
             case 0:
-                triggerMono(sounds.kick);
+                trigger(sounds.kick);
                 break;
             case 1: // noteOn message
-                triggerMono(sounds.snare);
+                trigger(sounds.snare);
                 break;
             case 2: // noteOn message
-                triggerMono(sounds.clap);
+                trigger(sounds.clap);
                 break;
             case 3: // noteOn message
-                triggerMono(sounds.clHat);
+                trigger(sounds.clHat);
                 break;
             case 4: // noteOn message
-                triggerMono(sounds.opHat);
+                trigger(sounds.opHat);
                 break;
             case 16: // noteOn message
                 triggerMono(sounds.kazoo);
