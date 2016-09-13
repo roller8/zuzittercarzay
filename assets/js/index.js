@@ -6,24 +6,77 @@ var subdivision = 4;
 var interval    = Math.round((minuteToMil / tempo) / subdivision);
 var swing       = false;
 var monoAudio   = new Audio();
+var charlieAudio = new Audio();
 
 var sounds      = {
-    'kick':     {'src': 'samples/drums/kick1.wav',    'volume': 1   },
-    'snare':    {'src': 'samples/drums/snare7.wav',      'volume': 1   },
-    'clap':     {'src': 'samples/drums/clap3.wav',          'volume': 0.5 },
-    'clHat':    {'src': 'samples/drums/closedhh2.wav', 'volume': 0.5 },
-    'opHat':    {'src': 'samples/drums/openhh1.wav',   'volume': 0.6 },
-    'yeah':     {'src': 'samples/smb_fireball.wav',           'volume': 0.7 },
-    'feel':     {'src': 'samples/smb_fireworks.wav',     'volume': 0.5 },
-    'check':    {'src': 'samples/smb_jump-super.wav',     'volume': 0.7 },
-    'here':     {'src': 'samples/smb_kick.wav',         'volume': 0.7 },
-    'oww':      {'src': 'samples/smb_pipe.wav',              'volume': 0.5 },
-    'woo':      {'src': 'samples/smb_powerup_appears.wav', 'volume': 0.5 },
-    'hiTom':    {'src': 'samples/smb_powerup.wav',        'volume': 0.5 },
-    'midTom':   {'src': 'samples/smb_coin.wav',        'volume': 0.5 },
-    'loTom':    {'src': 'samples/smb_mariodie.wav',        'volume': 1 },
-    'cowbell':  {'src': 'samples/smb_world_clear.wav',       'volume': 0.6 },
-    'kazoo':    {'src': 'samples/kazoo.wav',       'volume': 0.6 }
+    'kick': {
+        'src': 'samples/drums/kick1.wav',
+        'volume': 1
+    },
+    'snare': {
+        'src': 'samples/drums/snare7.wav',
+        'volume': 1
+    },
+    'clap': {
+        'src': 'samples/drums/clap3.wav',
+        'volume': 0.5
+    },
+    'clHat': {
+        'src': 'samples/drums/closedhh2.wav',
+        'volume': 0.5
+    },
+    'opHat': {
+        'src': 'samples/drums/openhh1.wav',
+        'volume': 0.6
+    },
+    'yeah': {
+        'src': 'samples/smb_fireball.wav',
+        'volume': 0.7
+    },
+    'feel': {
+        'src': 'samples/smb_fireworks.wav',
+        'volume': 0.5
+    },
+    'check': {
+        'src': 'samples/smb_jump-super.wav',
+        'volume': 0.7
+    },
+    'here': {
+        'src': 'samples/smb_kick.wav',
+        'volume': 0.7
+    },
+    'oww': {
+        'src': 'samples/smb_pipe.wav',
+        'volume': 0.5
+    },
+    'woo': {
+        'src': 'samples/smb_powerup_appears.wav',
+        'volume': 0.5
+    },
+    'hiTom': {
+        'src': 'samples/smb_powerup.wav',
+        'volume': 0.5
+    },
+    'midTom': {
+        'src': 'samples/smb_coin.wav',
+        'volume': 0.5
+    },
+    'loTom': {
+        'src': 'samples/smb_mariodie.wav',
+        'volume': 1
+    },
+    'cowbell': {
+        'src': 'samples/smb_world_clear.wav',
+        'volume': 0.6
+    },
+    'kazoo': {
+        'src': 'samples/kazoo.wav',
+        'volume': 0.6
+    },
+    'charlie': {
+        'src': 'samples/circus-charlie.m4a',
+        'volume': 0.6
+    }
 };
 
 var pattern     = [
@@ -191,6 +244,12 @@ function bindDrumKeys() {
             case 48:
                 triggerMono(sounds.cowbell);
                 break;
+            case 189:
+                triggerCircus(sounds.charlie);
+                break;
+            case 187:
+                stopCircus(charlieAudio);
+                break;
             case 32:
                 $startButton.click();
                 break;
@@ -219,10 +278,28 @@ function trigger(sound, count) {
     }
 }
 
+function triggerCircus(sound) {
+    charlieAudio.src    = sound.src;
+    charlieAudio.volume = sound.volume;
+
+    playSound(charlieAudio);
+}
+
 function playSound(audio) {
     var $glow = $('.glow');
 
     audio.play();
+    $glow.removeClass('hide');
+
+    setTimeout(function () {
+        $glow.addClass('hide');
+    }, interval - 5);
+}
+
+function stopCircus(audio) {
+    var $glow = $('.glow');
+
+    charlieAudio.pause();
     $glow.removeClass('hide');
 
     setTimeout(function () {
