@@ -8,11 +8,11 @@ var swing       = false;
 var monoAudio   = new Audio();
 
 var sounds      = {
-    'kick':     {'src': 'samples/03_BASS_01.wav',       'volume': 1   },
-    'snare':    {'src': 'samples/06_SNARE_01.wav',      'volume': 1   },
-    'clap':     {'src': 'samples/26_CLAP.wav',          'volume': 0.1 },
-    'clHat':    {'src': 'samples/09_HI-HAT_CLOSED.wav', 'volume': 0.2 },
-    'opHat':    {'src': 'samples/11_HI-HAT_OPEN.wav',   'volume': 0.07},
+    'kick':     {'src': 'samples/smb_bump.wav',    'volume': 1   },
+    'snare':    {'src': 'samples/smb_jump-super.wav',      'volume': 1   },
+    'clap':     {'src': 'samples/smb_kick.wav',          'volume': 0.5 },
+    'clHat':    {'src': 'samples/smb_fireball.wav', 'volume': 0.2 },
+    'opHat':    {'src': 'samples/smb_stomp.wav',   'volume': 0.07},
     'yeah':     {'src': 'samples/awyeah.wav',           'volume': 0.4 },
     'feel':     {'src': 'samples/canyoufeelit.wav',     'volume': 0.4 },
     'check':    {'src': 'samples/checkthisout.wav',     'volume': 0.4 },
