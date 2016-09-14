@@ -116,6 +116,49 @@
     animation: cloud 25s linear infinite;
 }
 
+.calliope {
+    position: absolute;
+    bottom: 100px;
+    right: 0;
+    margin-right: -126px;
+    width: 126px;
+    height: 83px;
+    background: url(../../images/calliope.png) no-repeat;
+    background-size: cover;
+}
+.calliope .wheel {
+    position: absolute;
+    background: url(../../images/roundcake.png) no-repeat;
+    background-size: cover;
+}
+.calliope .front {
+    width: 22px;
+    height: 22px;
+    bottom: 0;
+    left: 0;
+    animation: rotating 700ms linear infinite;
+}
+.calliope .rear {
+    width: 26px;
+    height: 26px;
+    bottom: 0;
+    right: 13px;
+    animation: rotating 700ms linear infinite;
+}
+.calliope.active {
+    animation: calliope 15s linear infinite;
+}
+@keyframes calliope {
+    0% {
+        right: 0;
+        margin-right: -126px;
+    }
+    100% {
+        right: 100%;
+        margin-right: 126px;
+    }
+}
+
 nav {
     position: absolute;
     width: 100%;
@@ -320,7 +363,7 @@ nav {
         transform: rotate(0deg);
     }
     to {
-        transform: rotate(360deg);
+        transform: rotate(-360deg);
     }
 }
 

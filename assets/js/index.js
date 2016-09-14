@@ -327,6 +327,8 @@ function triggerCircus(sound) {
     charlieAudio.volume = sound.volume;
 
     playSound(charlieAudio);
+
+    $('.calliope').addClass('active');
 }
 
 function playSound(audio) {
@@ -349,6 +351,8 @@ function playSound(audio) {
 function stopCircus(audio) {
 
     charlieAudio.pause();
+
+    $('.calliope').removeClass('active');
 
 }
 
