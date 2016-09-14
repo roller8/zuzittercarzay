@@ -12,20 +12,20 @@ var data;
 
 var sounds      = {
     'kick': {
-        'src': 'samples/drums/kick5.wav',
-        'volume': 0.7
+        'src': 'samples/drums/nes-kick.wav',
+        'volume': 1
     },
     'snare': {
-        'src': 'samples/drums/snare6.wav',
-        'volume': 0.7
+        'src': 'samples/drums/nes-snare.wav',
+        'volume': 0.8
     },
     'clap': {
         'src': 'samples/drums/clap3.wav',
-        'volume': 0.5
+        'volume': 0.3
     },
     'clHat': {
         'src': 'samples/drums/closedhh2.wav',
-        'volume': 0.4
+        'volume': 0.5
     },
     'opHat': {
         'src': 'samples/drums/openhh1.wav',
@@ -86,9 +86,17 @@ var sounds      = {
 };
 
 var pattern     = [
-    {'name': 'kick',    'seq': [1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0]},
-    {'name': 'snare',   'seq': [0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0]},
-    {'name': 'clap',    'seq': [0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,0]},
+    // pattern 1
+    // {'name': 'kick',    'seq': [1,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0]},
+    // {'name': 'snare',   'seq': [0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0]},
+    // {'name': 'clap',    'seq': [0,0,0,0,1,1,0,0,1,0,0,1,0,0,1,0]},
+    // {'name': 'clHat',   'seq': [1,0,1,0,1,0,1,0,0,1,0,1,1,0,1,0]},
+    // {'name': 'opHat',   'seq': [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1]}
+
+    // pattern 2
+    {'name': 'kick',    'seq': [1,0,0,0,0,0,0,1,0,1,0,1,0,0,1,0]},
+    {'name': 'snare',   'seq': [0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1]},
+    {'name': 'clap',    'seq': [0,0,0,0,1,0,0,0,0,0,1,1,0,0,1,0]},
     {'name': 'clHat',   'seq': [1,0,1,0,1,0,1,0,0,1,0,1,1,0,1,0]},
     {'name': 'opHat',   'seq': [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1]}
 ];
