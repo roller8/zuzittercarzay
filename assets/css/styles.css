@@ -28,23 +28,75 @@
     margin-left: -319px;
 }
 
-.row:nth-of-type(2n) .jumper{
-    background: url(../../images/mario.png) no-repeat;
+.row:nth-of-type(2n) .jumper {
+    background: url(../../images/mariosheet.png) no-repeat;
     background-size: cover;
 }
 
 .row:nth-of-type(2n + 1) .jumper {
-    background: url(../../images/luigi.png) no-repeat;
+    background: url(../../images/luigisheet.png) no-repeat;
     background-size: cover;
 }
 
 .jumper {
-    width: 33px;
-    height: 54px;
-    background-size: cover;
+    width: 45px;
+    height: 50px;
+    background-position: left;
     position: absolute;
-    top: -54px;
+    top: -50px;
     left: 12px;
+}
+
+.jumper.jumping {
+    animation: jumper 3000ms linear infinite;
+}
+.row:nth-of-type(n) .jumper.jumping {
+    background-position: right;
+}
+.jumper.hop {
+    animation: hop 100ms linear;
+}
+
+@keyframes jumper {
+    0% {
+        transform: translate(12px, 0);
+    }
+    12.5% {
+        transform: translate(88px, -200%);
+    }
+    25% {
+        transform: translate(154px, 0);
+    }
+    37.5% {
+        transform: translate(220px, -200%);
+    }
+    50% {
+        transform: translate(296px, 0);
+    }
+    62.5% {
+        transform: translate(362px, -200%);
+    }
+    75% {
+        transform: translate(440px, 0);
+    }
+    87.5% {
+        transform: translate(506px, -200%);
+    }
+    100% {
+        transform: translate(680px, 120px);
+    }
+}
+
+@keyframes hop {
+    0% {
+        transform: translate(0, 0);
+    }
+    30% {
+        transform: translate(0, -200%);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 .cloud {
@@ -370,55 +422,6 @@ nav {
 .glow.rotate {
     animation: rotating 200ms linear infinite;
     box-shadow: 0 0 100px rgba(255,144,22,1);
-}
-
-@keyframes jumper {
-    0% {
-        transform: translate(12px, 0);
-    }
-    12.5% {
-        transform: translate(88px, -200%);
-    }
-    25% {
-        transform: translate(154px, 0);
-    }
-    37.5% {
-        transform: translate(220px, -200%);
-    }
-    50% {
-        transform: translate(296px, 0);
-    }
-    62.5% {
-        transform: translate(362px, -200%);
-    }
-    75% {
-        transform: translate(440px, 0);
-    }
-    87.5% {
-        transform: translate(506px, -200%);
-    }
-    100% {
-        transform: translate(680px, 120px);
-    }
-}
-
-@keyframes hop {
-    0% {
-        transform: translate(0, 0);
-    }
-    30% {
-        transform: translate(0, -200%);
-    }
-    100% {
-        transform: translate(0, 0);
-    }
-}
-
-.jumper.jumping {
-    animation: jumper 3000ms linear infinite;
-}
-.jumper.hop {
-    animation: hop 100ms linear;
 }
 
 .hide { display: none; }
