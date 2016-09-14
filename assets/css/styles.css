@@ -265,25 +265,60 @@ nav {
 
 .bank {
     position: absolute;
-    color: #fff;
+    color: brown;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 10px;
-    line-height: 33px;
-    width: 44px;
+    font-size: 20px;
+    line-height: -200px;
+    overflow: hidden;
+    text-indent: 120%;
+    white-space: nowrap;
+}
+.bank:not(.active):hover {
+    white-space: normal;
+    text-indent: 0;
+    overflow: visible;
+    text-decoration: none;
+    text-transform: lowercase;
+    text-align: center;
+}
+
+.bank span {
+    position: relative;
+    top: -100px;
+    display: block;
+    width: auto;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.bank:not(.active):hover span {
+    background-color: beige;
+}
+
+.bank:not(.active):hover span:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    margin-left: -10px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: beige;
+    transform: rotate(45deg);
 }
 
 .bank.one {
     top: 40%;
     left: 10%;
-    margin-top: -35px;
-    margin-left: -63px;
-    width: 126px;
-    height: 70px;
+    margin-top: -63px;
+    margin-left: -75px;
+    width: 150px;
+    height: 126px;
     background: url(../../images/mouth.png) no-repeat;
-    overflow: hidden;
-    text-indent: 120%;
-    white-space: nowrap;
-    transform: scale(.7);
+    background-position: center;
+    transform: scale3d(.5, .5, 1);
 }
 .bank.two {
     top: 40%;
@@ -294,10 +329,7 @@ nav {
     height: 171px;
     background: url(../../images/kitty.png) no-repeat;
     background-size: cover;
-    overflow: hidden;
-    text-indent: 120%;
-    white-space: nowrap;
-    transform: scale(.5);
+    transform: scale3d(.5, .5, 1);
 }
 .bank.three {
     top: 40%;
@@ -307,10 +339,7 @@ nav {
     width: 126px;
     height: 130px;
     background: url(../../images/pumpkin.png) no-repeat;
-    overflow: hidden;
-    text-indent: 120%;
-    white-space: nowrap;
-    transform: scale(.5);
+    transform: scale3d(.5, .5, 1);
 }
 .bank.four {
     top: 40%;
@@ -320,10 +349,7 @@ nav {
     width: 126px;
     height: 126px;
     background: url(../../images/bear.png) no-repeat;
-    overflow: hidden;
-    text-indent: 120%;
-    white-space: nowrap;
-    transform: scale(.5);
+    transform: scale3d(.5, .5, 1);
 }
 .bank.five {
     top: 40%;
@@ -333,10 +359,7 @@ nav {
     width: 126px;
     height: 126px;
     background: url(../../images/tiger.png) no-repeat;
-    overflow: hidden;
-    text-indent: 120%;
-    white-space: nowrap;
-    transform: scale(.5);
+    transform: scale3d(.5, .5, 1);
 }
 .bank.active {
     transform: scale(1);
