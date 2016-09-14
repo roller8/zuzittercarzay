@@ -312,12 +312,13 @@ nav {
 .bank.one {
     top: 40%;
     left: 10%;
-    margin-top: -63px;
+    margin-top: -75px;
     margin-left: -75px;
     width: 150px;
-    height: 126px;
+    height: 150px;
     background: url(../../images/mouth.png) no-repeat;
     background-position: center;
+    background-size: contain;
     transform: scale3d(.5, .5, 1);
 }
 .bank.two {
