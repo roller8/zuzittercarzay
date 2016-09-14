@@ -493,5 +493,13 @@ nav {
     animation: rotating 200ms linear infinite;
     box-shadow: 0 0 100px rgba(255,144,22,1);
 }
-
+.overlay p {
+    font-size: 40px;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 40%;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .hide { display: none; }

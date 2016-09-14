@@ -111,6 +111,13 @@ function initAudioPlayer() {
     initMidiControls();
     handleRandomFloat();
     togglePattern();
+    openInterstitial();
+}
+
+function openInterstitial() {
+    $('.overlay').on('click', function (e) {
+        $(e.target).remove();
+    });
 }
 
 function handleRandomFloat() {
