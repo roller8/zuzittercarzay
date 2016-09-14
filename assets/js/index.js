@@ -6,8 +6,9 @@ var subdivision = 4;
 var interval    = Math.round((minuteToMil / tempo) / subdivision);
 var swing       = false;
 var monoAudio   = new Audio();
-var charlieAudio = new Audio();
-var midi, data;
+var longAudio = new Audio();
+var midi;
+var data;
 
 var sounds      = {
     'kick': {
@@ -76,6 +77,10 @@ var sounds      = {
     },
     'charlie': {
         'src': 'samples/circus-charlie-120.m4a',
+        'volume': 0.5
+    },
+    'marioTheme': {
+        'src': 'samples/cropped-mario-theme-120.m4a',
         'volume': 0.5
     }
 };
@@ -294,10 +299,10 @@ function bindDrumKeys() {
                 triggerMono(sounds.cowbell);
                 break;
             case 189:
-                triggerCircus(sounds.charlie);
+                triggerLongAudio(sounds.charlie);
                 break;
             case 187:
-                stopCircus(charlieAudio);
+                stopLongAudio(longAudio);
                 break;
             case 32:
                 $startButton.click();
@@ -337,11 +342,11 @@ function trigger(sound, count) {
     }
 }
 
-function triggerCircus(sound) {
-    charlieAudio.src    = sound.src;
-    charlieAudio.volume = sound.volume;
+function triggerLongAudio(sound) {
+    longAudio.src    = sound.src;
+    longAudio.volume = sound.volume;
 
-    playSound(charlieAudio);
+    playSound(longAudio);
 
     $('.calliope').addClass('active');
 }
@@ -368,9 +373,9 @@ function playSound(audio) {
     });
 }
 
-function stopCircus(audio) {
+function stopLongAudio(audio) {
 
-    charlieAudio.pause();
+    longAudio.pause();
 
     $('.calliope').removeClass('active');
 
@@ -397,7 +402,7 @@ function playSubdiv(count) {
 
 // midi functions
 var midiPlayNote    = 8;
-var midiNotes       = [0, 1, 2, 3, 4, 16, 17, 18, 19, 20, 21, 22, 23, 32, 33, 34, 104, 120];
+var midiNotes       = [0, 1, 2, 3, 4, 16, 17, 18, 19, 20, 21, 22, 23, 32, 33, 34, 88, 104, 120];
 var midiTempoNotes  = [40, 56];
 
 function initMidiControls() {
@@ -571,13 +576,16 @@ function onMIDIMessage(event) {
                 // triggerMono(sounds.cowbell);
                 midiTempo(note);
                 break;
+            case 88:
+                triggerLongAudio(sounds.marioTheme);
+                break;
             case 104: // noteOn message
-                triggerCircus(sounds.charlie);
+                triggerLongAudio(sounds.charlie);
                 midiLight(note);
                 break;
             case 120: // noteOn message
-                stopCircus(charlieAudio);
-                midiReset();
+                stopLongAudio(longAudio);
+                // midiReset();  // Clears the launchpad
                 break;
             case 8:
                 $startButton.click();
