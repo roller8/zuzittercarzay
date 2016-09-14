@@ -62,11 +62,29 @@
 .jumper.jumping {
     animation: jumper 3000ms linear infinite;
 }
-.row:nth-of-type(n) .jumper.jumping {
+.row:nth-of-type(n) .jumper.jumping,
+.row:nth-of-type(n) .jumper.getCoin {
     background-position: right;
 }
-.jumper.hop {
+.jumper.hop,
+.jumper.getCoin {
     animation: hop 100ms linear;
+}
+
+.jumper .coin {
+    position: absolute;
+    top: -20px;
+    left: 30px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    opacity: 0;
+    background: url(../../images/coin.png) no-repeat;
+    background-size: cover;
+}
+
+.jumper.getCoin .coin {
+    animation: coinflip 100ms linear;
 }
 
 @keyframes jumper {
@@ -108,6 +126,22 @@
     }
     100% {
         transform: translate(0, 0);
+    }
+}
+
+@keyframes coinflip {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    10% {
+        transform: translate(0, 0);
+    }
+    30% {
+        transform: translate(0, -400%);
+    }
+    99% {
+        transform: translate(0, -200%);
     }
 }
 

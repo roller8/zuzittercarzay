@@ -326,13 +326,27 @@ function trigger(sound, count) {
        playSound(audio); //normal
     }
 
+    triggerActions(sound);
+}
+
+function triggerActions(sound) {
+    var $jumper = $('.jumper');
+
     if (sound.src === sounds.check.src) {
-        var $jumper = $('.jumper');
         if (!$jumper.hasClass('jumping')) {
             $jumper.addClass('hop');
         }
         setTimeout(function() {
             $jumper.removeClass('hop');
+        }, 300);
+    }
+
+    if (sound.src === sounds.midTom.src) {
+        if (!$jumper.hasClass('jumping')) {
+            $jumper.addClass('getCoin');
+        }
+        setTimeout(function() {
+            $jumper.removeClass('getCoin');
         }, 300);
     }
 }
