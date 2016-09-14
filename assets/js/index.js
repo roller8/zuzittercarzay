@@ -119,15 +119,11 @@ function handleRandomFloat() {
         $banks.each(function(i, elt){
 
             var $elt = $(elt);
-            var $X = $elt.offset().left;
-            var $Y = $elt.offset().top;
             var dx = Math.sin(Math.random() *360);
             var dy = Math.sin(Math.random() *360);
-            var winW = window.innerWidth;
-            var winH = window.innerHeight;
-            $elt.offset({
-                'left': ($X + dx),
-                'top': ($Y + dy)
+
+            $elt.css({
+                'transform': 'translate(' + dx + 'px,' + dy + 'px) scale3d(.5, .5, 1)'
             });
         });
     }
