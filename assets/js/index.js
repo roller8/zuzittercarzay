@@ -101,11 +101,24 @@ function initAudioPlayer() {
 }
 
 function handleRandomFloat() {
-    var $banks = $('.bank');
     function loopMe() {
-        console.log('hello');
+        var $banks = $('.bank');
+        $banks.each(function(i, elt){
+
+            var $elt = $(elt);
+            var $X = $elt.offset().left;
+            var $Y = $elt.offset().top;
+            var dx = Math.sin(Math.random() *360);
+            var dy = Math.sin(Math.random() *360);
+            var winW = window.innerWidth;
+            var winH = window.innerHeight;
+            $elt.offset({
+                'left': ($X + dx),
+                'top': ($Y + dy)
+            });
+        });
     }
-    setInterval(loopMe, 1000);
+    setInterval(loopMe, 300);
 }
 
 function handleSoundBanks() {
@@ -117,7 +130,7 @@ function handleSoundBanks() {
         var $target = $(e.target);
         var index = $bank.index($target);
         $row.addClass('hide').eq(index).toggleClass('hide');
-        $target.addClass('active').siblings('.active').removeClass('active');
+        $target.toggleClass('active').siblings('.active').removeClass('active');
         $target.css({
             'animation-duration': (30/tempo)+ 's'
         });
@@ -326,7 +339,7 @@ function playSound(audio) {
         'animation-duration': 60/tempo + 's'
     });
     $jumper.css({
-        'animation-duration': (60/tempo) * 4+ 's'
+        'animation-duration': ((60/tempo) * 4) + 's'
     });
     $activeBank.css({
         'animation-duration': (30/tempo)+ 's'
