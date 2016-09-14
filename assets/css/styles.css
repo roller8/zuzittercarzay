@@ -19,6 +19,18 @@
     height: 100%;
     
 }
+.controls.moving {
+    animation: moveGround 10s linear infinite;
+}
+
+@keyframes moveGround {
+    from {
+        background-position: bottom right;
+    }
+    to {
+        background-position: bottom left;
+    }
+}
 
 .row {
     position: absolute;

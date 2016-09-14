@@ -185,22 +185,27 @@ function togglePattern() {
 
 function handleStartStop() {
     var count = 0;
+    var $glow = $('.glow');
+    var $jumper = $('.jumper');
+    var $controls = $('.controls');
 
     $startButton.on('click', function(e) {
         var init = new Date().getTime();
         $(e.currentTarget).toggleClass('active');
         handleTempo(init);
         if ($startButton.hasClass('active')) {
-            $('.glow').addClass('rotate');
-            $('.jumper').addClass('jumping');
+            $glow.addClass('rotate');
+            $jumper.addClass('jumping');
             loop();
+            $controls.addClass('moving');
         } else {
             clearTimeout(timer);
             count = 0;
-            $('.glow').removeClass('rotate');
-            $('.jumper').removeClass('jumping');
+            $glow.removeClass('rotate');
+            $jumper.removeClass('jumping');
             $('.bank').removeClass('active');
             $('.simple-button').removeClass('on');
+            $controls.removeClass('moving');
         }
 
         function loop() {
@@ -347,6 +352,7 @@ function playSound(audio) {
     var $glow = $('.glow');
     var $jumper = $('.jumper');
     var $activeBank = $('.bank.active');
+    var $controls = $('.controls');
 
     $glow.css({
         'animation-duration': 60/tempo + 's'
@@ -356,6 +362,9 @@ function playSound(audio) {
     });
     $activeBank.css({
         'animation-duration': (30/tempo)+ 's'
+    });
+    $controls.css({
+        'animation-duration': 360/tempo + 's'
     });
 }
 
