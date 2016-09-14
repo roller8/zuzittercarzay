@@ -75,8 +75,8 @@ var sounds      = {
         'volume': 0.6
     },
     'charlie': {
-        'src': 'samples/circus-charlie.m4a',
-        'volume': 0.6
+        'src': 'samples/circus-charlie-120.m4a',
+        'volume': 0.5
     }
 };
 
@@ -124,7 +124,7 @@ function handleRandomFloat() {
 function handleSoundBanks() {
     var $bank = $('.bank');
     var $row = $('.row');
-    
+
     $bank.on('click', function(e) {
         e.preventDefault();
         var $target = $(e.target);
@@ -332,11 +332,12 @@ function triggerCircus(sound) {
 }
 
 function playSound(audio) {
+    audio.play();
+
     var $glow = $('.glow');
     var $jumper = $('.jumper');
     var $activeBank = $('.bank.active');
 
-    audio.play();
     $glow.css({
         'animation-duration': 60/tempo + 's'
     });
