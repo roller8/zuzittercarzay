@@ -47,6 +47,75 @@
     left: 12px;
 }
 
+.cloud {
+    position: absolute;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-image: linear-gradient(to top, #32b4ff 22%,#32b4ff 22%,#87d3f5 63%,#ffffff 100%);
+    animation: cloud 15s linear infinite;
+}
+
+@keyframes cloud {
+    0% {
+        margin-left: 1500px;
+        opacity: 0;
+    }
+    3% {
+        opacity: 1;
+    }
+    97% {
+        opacity: 1;
+    }
+    100% {
+        margin-left: -100px;;
+        opacity: 0
+    }
+}
+
+.cloud.one {
+    transform: scale3d(2.5, 0.35,1);
+    bottom: 30%;
+    left: 40%;
+    animation: cloud 30s linear infinite;
+}
+.cloud.two {
+    transform: scale3d(3, 0.5,.4);
+    top: 30%;
+    left: 10%;
+    animation: cloud 15s linear infinite;
+}
+.cloud.three {
+    transform: scale3d(2, 0.25,.3);
+    top: 50%;
+    left: 50%;
+    animation: cloud 20s linear infinite;
+}
+.cloud.four {
+    transform: scale3d(3, 0.5,.1);
+    top: 20%;
+    left: 38%;
+    animation: cloud 17s linear infinite;
+}
+.cloud.five {
+    transform: scale3d(3, 0.5,.8);
+    top: 5%;
+    left: 0;
+    animation: cloud 22s linear infinite;
+}
+.cloud.six {
+    transform: scale3d(1, 0.15,1.5);
+    top: 30%;
+    left: 10%;
+    animation: cloud 30s linear infinite;
+}
+.cloud.seven {
+    transform: scale3d(2.5, 0.35,1);
+    top: 59%;
+    left: 58%;
+    animation: cloud 25s linear infinite;
+}
+
 nav {
     position: absolute;
     width: 100%;
