@@ -402,8 +402,23 @@ nav {
     }
 }
 
+@keyframes hop {
+    0% {
+        transform: translate(0, 0);
+    }
+    30% {
+        transform: translate(0, -200%);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
 .jumper.jumping {
     animation: jumper 3000ms linear infinite;
+}
+.jumper.hop {
+    animation: hop 100ms linear;
 }
 
 .hide { display: none; }

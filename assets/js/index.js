@@ -320,6 +320,16 @@ function trigger(sound, count) {
     } else {
        playSound(audio); //normal
     }
+
+    if (sound.src === sounds.check.src) {
+        var $jumper = $('.jumper');
+        if (!$jumper.hasClass('jumping')) {
+            $jumper.addClass('hop');
+        }
+        setTimeout(function() {
+            $jumper.removeClass('hop');
+        }, 300);
+    }
 }
 
 function triggerCircus(sound) {
