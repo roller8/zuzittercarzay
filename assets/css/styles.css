@@ -502,4 +502,8 @@ nav {
     top: 25%;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.overlay sub {
+    font-size: 18px;
+}
 .hide { display: none; }
